@@ -27,6 +27,8 @@ import { Error404Component } from './errors/404.component'
 import { AuthService } from './user/auth.service'
 import { ModalTriggerDirective } from './common/modalTrigger.directive';
 
+// toastr and jquery javascript libraries add their main object (toastr and $ respectively) to the global window object.
+// So, we just get a reference to them and use them
 let toastr:Toastr = window['toastr'];
 let jQuery = window['$'];
 
