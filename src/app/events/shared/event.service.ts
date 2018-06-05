@@ -10,6 +10,9 @@ export class EventService {
     
   }
 
+  
+  // Note: notice all the returns... that is because the http. api call returns an Observable ... and when we do a return we
+  // are returning that observable to the caller of the methods in this service.
   getEvents():Observable<IEvent[]> {
     return this.http.get<IEvent[]>('/api/events')
       .pipe(catchError(this.handleError<IEvent[]>('getEvents', [])))
