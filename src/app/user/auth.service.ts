@@ -19,8 +19,12 @@ export class AuthService {
       .pipe(tap(data => {
         this.currentUser = <IUser>data['user'];
       }))
+    // If there is no error then the stream values flow
+    // But if there is an error then we are creating an observable stream which contains just "false" in it
+    // implying that authentication failed. So, when the consumer does .subscribe(x=> { // in here he can check if x is false 
+    // and if it is then the consumer of this API will know that the authentication failed })
       .pipe(catchError(err => {
-        return of(false)
+        return of(false)        // Create and then return a new observable stream which has 'false' in it
       }))
   }
 
