@@ -11,8 +11,9 @@ import { DurationPipe } from '../shared/duration.pipe';
 describe('SesisonListComponent', () => {
   let fixture: ComponentFixture<SessionListComponent>,
     component: SessionListComponent,
-    element: HTMLElement,
-    debugEl: DebugElement
+    debugEl: DebugElement,            // wrapper around the native element defined below
+    element: HTMLElement              // I think this is the top level DOM node in the template (.html)
+    
 
   beforeEach(async(() => {
     let mockAuthService = {
@@ -50,14 +51,23 @@ describe('SesisonListComponent', () => {
   describe('initial display', () => {
 
     it('should have the correct session title', () => {
+      // First we populate the @input properties of the SUT
+      //
       component.sessions = [{ id: 3, name: 'Session 1', presenter: 'Joe', duration: 1, level: 'beginner', abstract: 'abstract', voters: ['john', 'bob']}];
       component.filterBy = 'all';
       component.sortBy = 'name';
       component.eventId = 4;
 
+      // Then we call the SUT
+      //
       component.ngOnChanges();    // This is the SUT  - the ngOnChanges() method in the SessionListComponent
+      
+      // We force Change Detection so angular does its thing of binding, etc.
+      //
       fixture.detectChanges();
 
+      // Now we want to see if the template does get the new stuff bound to it 
+      // 
       // expect(element.querySelector('[well-title]').textContent).toContain('Session 1');
       expect(debugEl.query(By.css('[well-title]')).nativeElement.textContent).toContain('Session 1');
     })
