@@ -34,6 +34,10 @@ describe('SesisonListComponent', () => {
         { provide: AuthService, useValue: mockAuthService },
         { provide: VoterService, useValue: mockVoterService },
       ],
+      // What this NO_ERRORS_SCHEMA means is that in the template if you find other components or pretty much any HTML, etc
+      // that you cannot render then just ignore and continue.
+      // USE CASE: The SessionListComponent which we are testing ... its template has other components as well and we don't 
+      // want to test them in this test so we are telling angular to ignore them .... This is how you do Shallow Integrated Tests
       schemas: [NO_ERRORS_SCHEMA]
     })
   }))
