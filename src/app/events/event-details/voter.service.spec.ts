@@ -8,7 +8,14 @@ describe('VoterService', () => {
     mockHttp;
 
   beforeEach(() => {
+    // Here we are creating an object ( a mock) that will support 2 methods, a delete and a post
+    // because the SUT makes http delete and post calls, using HttpClient
+    // and we are only testing the service and not the Http calls ..so, we need to mock out the http calls 
+    
     mockHttp = jasmine.createSpyObj('mockHttp', ['delete', 'post'])
+    // If you look at the VoterService code (the SUT - system under Test Here) you will see that it has DI on HttpClient
+    // Since we are createing the VoterService object ourselves, we need to provide the arguments .... this is where we 
+    // are providing the mock httpclient ...
     voterService = new VoterService(mockHttp);
   });
 
@@ -16,6 +23,7 @@ describe('VoterService', () => {
 
     it('should remove the voter from the list of voters', () => {
       var session = { id: 6, voters: ['joe', 'john']};
+      // Configuring the mock by saying, that delete method of the mock should return an Observable which has a false value
       mockHttp.delete.and.returnValue(of(false));
 
       voterService.deleteVoter(3, <ISession>session, "joe");
