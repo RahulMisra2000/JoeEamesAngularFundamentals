@@ -24,6 +24,8 @@ describe('SesisonListComponent', () => {
       userHasVoted: () => true,
     };
 
+    // Think of this as coding the NgModule with only those parts that are needed by the SUT - The SessionListComponent
+    //
     TestBed.configureTestingModule({
       imports: [],
       declarations: [
@@ -38,6 +40,9 @@ describe('SesisonListComponent', () => {
       // that you cannot render then just ignore and continue.
       // USE CASE: The SessionListComponent which we are testing ... its template has other components as well and we don't 
       // want to test them in this test so we are telling angular to ignore them .... This is how you do Shallow Integrated Tests
+      
+      // If you want to do a DEEP Integrated test then remove the NO_ERRORS_SCHEMA and list all the other components that are in the
+      // SessionListComponet's template, inside the declaration array above.
       schemas: [NO_ERRORS_SCHEMA]
     })
   }))
