@@ -51,10 +51,10 @@ describe('SesisonListComponent', () => {
   // We HAVE to continue in a different beforeEach() because the above beforeEach() is async and it NEEDS TO COMPLETE 
   // before we can create the component below and do the testing ...
   beforeEach(() => {
-    fixture = TestBed.createComponent(SessionListComponent);
-    component = fixture.componentInstance;
-    debugEl = fixture.debugElement;
-    element = fixture.nativeElement;
+    fixture = TestBed.createComponent(SessionListComponent);  // The component fixture : wrapper around the component (.ts)
+    component = fixture.componentInstance;                    // The component
+    debugEl = fixture.debugElement;                           // The wrapper around DOM node described below
+    element = fixture.nativeElement;                          // The native DOM node in the template (.html)
   })
 
   describe('initial display', () => {
