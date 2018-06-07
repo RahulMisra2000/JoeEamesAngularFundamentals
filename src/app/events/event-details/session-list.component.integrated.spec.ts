@@ -37,6 +37,9 @@ describe('SesisonListComponent', () => {
     })
   }))
 
+  
+  // We HAVE to continue in a different beforeEach() because the above beforeEach() is async and it NEEDS TO COMPLETE 
+  // before we can create the component below and do the testing ...
   beforeEach(() => {
     fixture = TestBed.createComponent(SessionListComponent);
     component = fixture.componentInstance;
@@ -52,7 +55,7 @@ describe('SesisonListComponent', () => {
       component.sortBy = 'name';
       component.eventId = 4;
 
-      component.ngOnChanges();
+      component.ngOnChanges();    // This is the SUT  - the ngOnChanges() method in the SessionListComponent
       fixture.detectChanges();
 
       // expect(element.querySelector('[well-title]').textContent).toContain('Session 1');
